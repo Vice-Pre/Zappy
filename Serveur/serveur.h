@@ -40,12 +40,7 @@
 # define THYSTAME 6
 # define PLAYER 7
 # define EGGS 8
-
-typedef struct		s_obj
-{
-  int			type;
-  struct s_obj		*next;
-}			t_obj;
+# define NBR_RES 6
 
 typedef struct		s_monitor
 {
@@ -68,7 +63,7 @@ typedef struct		s_client
   int			o;
   int			lvl;
   int			team;
-  t_obj			*inventaire;
+  int			*inv;
 }			t_client;
 
 typedef struct		s_serveur
@@ -84,7 +79,6 @@ typedef struct		s_serveur
   int			fd_max; //le fdMax pour le select du serveur
   int			idmax; // id max des clients
   int			fd; // fd du serveur
-
 }			t_serveur;
 
 typedef struct		s_option
@@ -104,6 +98,7 @@ int			initClient(t_serveur *s, int fd, char *team);
 void			initcmd(void);
 int			send_msg(int, char *);
 int			send_msgToAll(t_serveur *, char *);
+int			send_msgToAll_Client(t_serveur *, char *);
 int			send_msgToAll_exeptOne(t_serveur *, char *, int);
 int			send_msgToAll_Monitor(t_serveur *s, char *msg);
 int			opt_p(t_option *option, char **av, int *i);
@@ -120,11 +115,16 @@ int			plv(t_option *option, int fd);
 int			sgt(t_serveur *, int);
 void			msz(int fd, int x, int y);
 int			pdi(t_serveur *s, int i);
+void			pin(t_serveur *, int);
+t_serveur		*add_inv(t_serveur *, int, char *);
+t_serveur		*rm_inv(t_serveur *, int, char *);
 int			pnw_to_all_monitor(t_serveur *s, int fd);
 int			new_monitor(t_monitor **list, int fd);
 int			del_monitor(t_monitor **list, int fd);
 void			show_Monitor(t_monitor *tmp);
 int			read_cmd(t_serveur *s, int fd);
 int			exec_cmd(t_serveur *s, int fd, char *cmd);
+int			*init_inv(t_serveur *, int);
+void			show_inv(int *);
 
 #endif /* !SERVEUR_H_ */

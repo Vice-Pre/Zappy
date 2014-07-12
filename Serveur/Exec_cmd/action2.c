@@ -2,17 +2,17 @@
 
 t_serveur	*cmdtake(t_serveur *s, int fd, char *buff)
 {
-  printf("pgt #n i\n");
-  printf("pin #n X Y q q q q q q q\n");
-  //printf("bct X Y q q q q q q q\n");
+  add_inv(s, fd, buff);
+  //pgt(s, fd, buff);
+  pin(s, fd);
   bct(fd, s->map, s->ctab->x, s->ctab->y);
 }
 
 t_serveur	*cmdlet(t_serveur *s, int fd, char *buff)
 {
-  printf("pdr #n i\n");
-  printf("pin #n X Y q q q q q q q\n");
-  //printf("bct X Y q q q q q q q\n");
+  rm_inv(s, fd, buff);
+  //pdr(s, fd, buff);
+  pin(s, fd);
   bct(fd, s->map, s->ctab->x, s->ctab->y);
 }
 
@@ -25,11 +25,12 @@ t_serveur	*cmdkick(t_serveur *s, int fd, char *buff)
 
 t_serveur	*cmdbroad(t_serveur *s, int fd, char *buff)
 {
-  send_msgToAll_Client(s, buff);
-  printf("pbc #n M\n");
+  //printf("pbc #n M\n");
+  //pbc(s, fd, buff);
+  //send_msgToAll_Client(s, buff);
 }
 
 t_serveur	*cmdinc(t_serveur *s, int fd, char *buff)
 {
-  printf("pic X Y L #n #n ...\n");
+  //printf("pic X Y L #n #n ...\n");
 }
